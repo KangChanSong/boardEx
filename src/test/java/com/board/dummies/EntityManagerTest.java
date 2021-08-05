@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.validation.constraints.Null;
 
 @SpringBootTest
 @Transactional
@@ -33,5 +32,21 @@ public class EntityManagerTest {
                 board.toString();
             }
         });
+    }
+
+    /**
+     * 하이버네이트는 엔티티를 영속화 할 때, 컬랙션을 감싸서 하이버네이트가 제공하는 내장 컬렉션으로 변경한
+     * 다
+     */
+    @Test
+    public void WRAPPING_테스트(){
+
+        Board board= new Board();
+        System.out.println(board.getReplies().getClass());
+
+        board.getReplies().forEach( System.out::println);
+        em.persist(board);
+        System.out.println(board.getReplies().getClass());
+        board.getReplies().forEach( System.out::println);
     }
 }
