@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class BoardReadDto {
 
+    private Long id;
     private String author;
     private String title;
     private String content;
@@ -28,6 +29,7 @@ public class BoardReadDto {
                 .collect(Collectors.toList());
 
         return BoardReadDto.builder()
+                .id(board.getId())
                 .author(board.getAuthor())
                 .title(board.getTitle())
                 .content(board.getContent())

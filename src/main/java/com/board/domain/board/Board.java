@@ -46,4 +46,10 @@ public class Board {
         this.member = member;
         member.getBoards().add(this);
     }
+
+    //== 편의 메서드 ==//
+    public void update(Board board){
+        this.title = board.getTitle() != null ? board.getTitle() : this.title;
+        this.content = board.getContent() != null ? board.getContent() : this.content;
+    }
 }

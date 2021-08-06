@@ -3,6 +3,7 @@ package com.board.controller;
 import com.board.domain.board.Board;
 import com.board.domain.board.dtos.BoardListDto;
 import com.board.domain.board.dtos.BoardReadDto;
+import com.board.domain.board.dtos.BoardRegisterDto;
 import com.board.methods.BoardTestMethods;
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
@@ -80,6 +81,31 @@ public class BoardControllerTest {
 
         //then
         assertEquals(body.getBoardListDtos().size(), 10);
+    }
+    
+    @Test
+    public void 게시판_수정(){
+        //given
+        Long id = 1L;
+        String modifiedTitle = "modified";
+        String modifiedContent = "modified";
+        BoardRegisterDto boardRegisterDto = new BoardRegisterDto();
+        boardRegisterDto.setId(id);
+        boardRegisterDto.setTitle(modifiedTitle);
+        boardRegisterDto.setContent(modifiedContent);
+
+        //when
+        String modifyUrl = createUrl() +"/modify";
+
+        restTemplate.postForEntity(modifyUrl, boardRegisterDto, BoardController.BoardId.class);
+
+        //then
+        String getUrl = createUrl() + "/get/1";
+        ResponseEntity<BoardReadDto> result = restTemplate.getForEntity(getUrl, BoardReadDto.class);
+        BoardReadDto resultDto = result.getBody();
+
+        assertEquals(resultDto.getTitle(), modifiedTitle);
+        assertEquals(resultDto.getContent(), modifiedContent);
     }
 
 

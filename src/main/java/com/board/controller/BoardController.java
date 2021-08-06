@@ -38,6 +38,16 @@ public class BoardController {
         return new BoardListWrapper(boardService.getList());
     }
 
+    @PostMapping("/api/v1/modify")
+    public void modify(@RequestBody BoardRegisterDto dto){
+
+        boardService.modify(Board.builder()
+                .id(dto.getId())
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .build());
+    }
+
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter

@@ -27,6 +27,13 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
+    public void modify(Board board){
+
+        Board findBoard = boardRepository.find(board.getId());
+        findBoard.update(board);
+
+    }
+
     public void delete(Long id){
         boardRepository.delete(id);
     }
