@@ -1,6 +1,6 @@
-package com.board.repository.methods;
+package com.board.methods;
 
-import com.board.domain.Reply;
+import com.board.domain.reply.Reply;
 
 public class ReplyTestMethods {
 

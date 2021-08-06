@@ -1,4 +1,4 @@
-package com.board.repository.methods;
+package com.board.methods;
 
 import com.board.domain.Member;
 

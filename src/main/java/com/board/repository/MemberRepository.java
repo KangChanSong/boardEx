@@ -36,5 +36,6 @@ public class MemberRepository {
     public void delete(Member member) {
         em.remove(member);
     }
+
 }
 

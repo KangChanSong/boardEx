@@ -1,18 +1,16 @@
 package com.board.repository;
 
-import com.board.domain.Board;
-import org.assertj.core.api.Assertions;
+import com.board.domain.board.Board;
+import com.board.methods.BoardTestMethods;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.board.methods.BoardTestMethods.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -27,14 +25,7 @@ class BoardRepositoryTest {
     @Test
     public void 게시판_등록_조회(){
         //given
-        String title = "제목";
-        String content = "내용";
-        String author = "저자";
-
-        Board board = new Board();
-        board.setTitle(title);
-        board.setContent(content);
-        board.setAuthor(author);
+        Board board = createBoard();
 
         //when
         boardRepository.save(board);
@@ -42,9 +33,9 @@ class BoardRepositoryTest {
 
         //then
         assertThat(findedBoard.getId()).isEqualTo(board.getId());
-        assertThat(findedBoard.getTitle()).isEqualTo(title);
-        assertThat(findedBoard.getContent()).isEqualTo(content);
-        assertThat(findedBoard.getAuthor()).isEqualTo(author);
+        assertThat(findedBoard.getTitle()).isEqualTo(BOARD_TITLE);
+        assertThat(findedBoard.getContent()).isEqualTo(BOARD_CONTENT);
+        assertThat(findedBoard.getAuthor()).isEqualTo(BOARD_AUTHOR);
         assertThat(findedBoard == board).isEqualTo(true);
     }
 
@@ -75,8 +66,7 @@ class BoardRepositoryTest {
     @Test
     public void 게시판_수정(){
         //given
-        Board board = new Board();
-        board.setTitle("title");
+        Board board = createBoard();
         boardRepository.save(board);
 
         //when
@@ -85,7 +75,7 @@ class BoardRepositoryTest {
          * 영속성 컨텍스트 안에서 수정됨
          * 그래서 트랜잭션이 커밋되는 시점에 변경 감지가 일어나 db에 반영됏음
          */
-        board.setTitle("title2");
+        //board.setTitle(?)
 
         //then
         Board findedBoard = boardRepository.find(board.getId());

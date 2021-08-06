@@ -1,6 +1,6 @@
 package com.board.repository;
 
-import com.board.domain.Reply;
+import com.board.domain.reply.Reply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,4 +24,5 @@ public class ReplyRepository {
     public void delete(Long saveId) {
         em.remove(em.find(Reply.class, saveId));
     }
+
 }

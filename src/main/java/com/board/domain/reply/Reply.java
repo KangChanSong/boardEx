@@ -1,5 +1,7 @@
-package com.board.domain;
+package com.board.domain.reply;
 
+import com.board.domain.Member;
+import com.board.domain.board.Board;
 import lombok.Getter;
 import lombok.Setter;
 

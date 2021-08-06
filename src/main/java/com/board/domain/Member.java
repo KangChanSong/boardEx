@@ -1,5 +1,7 @@
 package com.board.domain;
 
+import com.board.domain.board.Board;
+import com.board.domain.reply.Reply;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,10 +17,10 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Board> boards = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Reply> replies = new ArrayList<>();
 
     private String username;

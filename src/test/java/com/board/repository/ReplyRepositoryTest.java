@@ -1,12 +1,10 @@
 package com.board.repository;
 
-import com.board.domain.Board;
-import com.board.domain.Reply;
-import org.junit.jupiter.api.Assertions;
+import com.board.domain.board.Board;
+import com.board.domain.reply.Reply;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -30,7 +28,7 @@ public class ReplyRepositoryTest {
     public void 댓글_등록(){
         //given
         Board board = new Board();
-        board.setContent("board");
+        //board.setContent("board");
         boardRepository.save(board);
         Board findBoard = boardRepository.find(board.getId());
 

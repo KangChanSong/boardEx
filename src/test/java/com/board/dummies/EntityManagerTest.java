@@ -1,6 +1,6 @@
 package com.board.dummies;
 
-import com.board.domain.Board;
+import com.board.domain.board.Board;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

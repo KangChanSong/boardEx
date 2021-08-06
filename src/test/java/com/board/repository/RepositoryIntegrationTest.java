@@ -1,25 +1,20 @@
 package com.board.repository;
 
-import com.board.domain.Board;
+import com.board.domain.board.Board;
 import com.board.domain.Member;
-import com.board.domain.Reply;
-import com.board.repository.methods.BoardTestMethods;
-import com.board.repository.methods.MemberTestMethods;
-import com.board.repository.methods.ReplyTestMethods;
-import org.junit.jupiter.api.Assertions;
+import com.board.domain.reply.Reply;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-import static com.board.repository.methods.BoardTestMethods.BOARD_CONTENT;
-import static com.board.repository.methods.BoardTestMethods.createBoard;
-import static com.board.repository.methods.MemberTestMethods.USERNAME;
-import static com.board.repository.methods.MemberTestMethods.createMember;
-import static com.board.repository.methods.ReplyTestMethods.REPLY_CONTENT;
-import static com.board.repository.methods.ReplyTestMethods.createReply;
+import static com.board.methods.BoardTestMethods.BOARD_CONTENT;
+import static com.board.methods.BoardTestMethods.createBoard;
+import static com.board.methods.MemberTestMethods.USERNAME;
+import static com.board.methods.MemberTestMethods.createMember;
+import static com.board.methods.ReplyTestMethods.REPLY_CONTENT;
+import static com.board.methods.ReplyTestMethods.createReply;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 @SpringBootTest
@@ -70,6 +65,7 @@ public class RepositoryIntegrationTest {
     }
 
     @Test
+    @Rollback(value = false)
     public void 조회(){
         //given
         Member member = createMember();
@@ -85,10 +81,9 @@ public class RepositoryIntegrationTest {
         replyRepository.save(reply);
 
         //then
-        List<Board> findedBoards = boardRepository.findAll();
-
-        List<Reply> findedRepliesByBoard = replyRepository.findAllByBoardId(board.getId());
-
+        Board findedBoards = boardRepository.findOneWithReplies(board.getId());
+        assertSame(findedBoards.getReplies().get(0), reply);
+        assertSame(findedBoards.getMember(), member);
 
     }
 

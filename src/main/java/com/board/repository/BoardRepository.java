@@ -1,6 +1,6 @@
 package com.board.repository;
 
-import com.board.domain.Board;
+import com.board.domain.board.Board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -23,11 +23,22 @@ public class BoardRepository {
     }
 
     public List<Board> findAll() {
-        return em.createQuery("select b from Board b").getResultList();
+        return em.createQuery("select b from Board b", Board.class)
+                .getResultList();
     }
 
     public void delete(Long id) {
         Board board = em.find(Board.class, id);
         em.remove(board);
+    }
+
+    public Board findOneWithReplies(Long id) {
+
+        return em.createQuery("select b from Board b " +
+                "join fetch b.replies r " +
+                "join fetch b.member m" +
+                " where b.id =: id", Board.class)
+                .setParameter("id", id)
+                .getResultList().get(0);
     }
 }
