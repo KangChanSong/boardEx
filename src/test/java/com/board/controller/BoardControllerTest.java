@@ -1,31 +1,18 @@
 package com.board.controller;
 
 import com.board.domain.board.Board;
-import com.board.domain.board.dtos.BoardListDto;
 import com.board.domain.board.dtos.BoardReadDto;
 import com.board.domain.board.dtos.BoardRegisterDto;
-import com.board.methods.BoardTestMethods;
-import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
-import javax.persistence.EntityManager;
-
-import java.util.ArrayList;
-
-import static com.board.methods.BoardTestMethods.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static com.board.test.methods.BoardTestMethods.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class BoardControllerTest {
@@ -46,8 +33,8 @@ public class BoardControllerTest {
         Board board = createBoard();
 
         //when
-        ResponseEntity<BoardController.BoardId> responseEntity = 
-                restTemplate.postForEntity(url, board, BoardController.BoardId.class);
+        ResponseEntity<BoardController.BoardIdWrapper> responseEntity =
+                restTemplate.postForEntity(url, board, BoardController.BoardIdWrapper.class);
 
         //then
         assertSame(responseEntity.getBody().getId(), 1L);
@@ -97,7 +84,7 @@ public class BoardControllerTest {
         //when
         String modifyUrl = createUrl() +"/modify";
 
-        restTemplate.postForEntity(modifyUrl, boardRegisterDto, BoardController.BoardId.class);
+        restTemplate.postForEntity(modifyUrl, boardRegisterDto, BoardController.BoardIdWrapper.class);
 
         //then
         String getUrl = createUrl() + "/get/1";

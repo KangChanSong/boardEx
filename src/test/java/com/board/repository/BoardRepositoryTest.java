@@ -1,7 +1,6 @@
 package com.board.repository;
 
 import com.board.domain.board.Board;
-import com.board.methods.BoardTestMethods;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.board.methods.BoardTestMethods.*;
+import static com.board.test.methods.BoardTestMethods.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

@@ -26,11 +26,11 @@ public class BoardController {
     }
 
     @PostMapping("api/v1/register")
-    public BoardId register(@RequestBody BoardRegisterDto dto){
+    public BoardIdWrapper register(@RequestBody BoardRegisterDto dto){
 
         Long saveId = boardService.register(dto.toEntity());
         System.out.println("======controller=======");
-        return new BoardId(saveId);
+        return new BoardIdWrapper(saveId);
     }
 
     @GetMapping("api/v1/list")
@@ -51,7 +51,7 @@ public class BoardController {
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
-    static class BoardId{
+    static class BoardIdWrapper{
         private Long id;
 
     }

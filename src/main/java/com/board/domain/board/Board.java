@@ -1,6 +1,6 @@
 package com.board.domain.board;
 
-import com.board.domain.Member;
+import com.board.domain.member.Member;
 import com.board.domain.reply.Reply;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

@@ -1,13 +1,13 @@
 package com.board.repository;
 
-import com.board.domain.Member;
+import com.board.domain.member.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static com.board.methods.MemberTestMethods.*;
+import static com.board.test.methods.MemberTestMethods.*;
 
 @SpringBootTest
 @Transactional
@@ -54,7 +54,7 @@ class MemberRepositoryTest {
 
         //when
         memberRepository.save(member);
-        member.setUsername("수정됨");
+        //member.setUsername("수정됨");
 
         //then
         Member findMember = memberRepository.find(member.getId());

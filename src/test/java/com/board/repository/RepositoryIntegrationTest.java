@@ -1,7 +1,7 @@
 package com.board.repository;
 
 import com.board.domain.board.Board;
-import com.board.domain.Member;
+import com.board.domain.member.Member;
 import com.board.domain.reply.Reply;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +9,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.board.methods.BoardTestMethods.BOARD_CONTENT;
-import static com.board.methods.BoardTestMethods.createBoard;
-import static com.board.methods.MemberTestMethods.USERNAME;
-import static com.board.methods.MemberTestMethods.createMember;
-import static com.board.methods.ReplyTestMethods.REPLY_CONTENT;
-import static com.board.methods.ReplyTestMethods.createReply;
+import static com.board.test.methods.BoardTestMethods.BOARD_CONTENT;
+import static com.board.test.methods.BoardTestMethods.createBoard;
+import static com.board.test.methods.MemberTestMethods.USERNAME;
+import static com.board.test.methods.MemberTestMethods.createMember;
+import static com.board.test.methods.ReplyTestMethods.REPLY_CONTENT;
+import static com.board.test.methods.ReplyTestMethods.createReply;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 @SpringBootTest

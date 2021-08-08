@@ -1,4 +1,4 @@
-package com.board.methods;
+package com.board.test.methods;
 
 import com.board.domain.board.Board;
 

@@ -1,6 +1,6 @@
 package com.board.repository;
 
-import com.board.domain.Member;
+import com.board.domain.member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

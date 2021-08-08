@@ -1,16 +1,19 @@
-package com.board.domain;
+package com.board.domain.member;
 
 import com.board.domain.board.Board;
 import com.board.domain.reply.Reply;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Builder
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Member {
 
     @Id @GeneratedValue
@@ -26,4 +29,9 @@ public class Member {
     private String username;
     private String password;
 
+    public void update(Member member) {
+
+        this.username = member.getUsername() == null ? this.username : member.getUsername();
+        this.password = member.getPassword() == null ? this.password : member.getPassword();
+    }
 }

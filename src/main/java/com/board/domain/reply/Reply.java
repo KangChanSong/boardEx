@@ -1,15 +1,19 @@
 package com.board.domain.reply;
 
-import com.board.domain.Member;
+import com.board.domain.member.Member;
 import com.board.domain.board.Board;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter @Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reply {
 
     @Id @GeneratedValue
@@ -19,7 +23,12 @@ public class Reply {
     //게시판 글의 author 와 겹칠까봐 writer 로 햇음
     private String writer;
     private String content;
+
+    @CreationTimestamp
     private LocalDateTime createdDate;
+
+    @UpdateTimestamp
+    private LocalDateTime modifiedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
@@ -38,5 +47,10 @@ public class Reply {
     public void setMember(Member member){
         this.member = member;
         member.getReplies().add(this);
+    }
+
+    //==편의 메서드==//
+    public void update(Reply reply) {
+        this.content = reply.getContent() != null ? reply.getContent() : this.content;
     }
 }

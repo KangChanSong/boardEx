@@ -1,4 +1,4 @@
-package com.board.methods;
+package com.board.test.methods;
 
 import com.board.domain.reply.Reply;
 
@@ -8,9 +8,9 @@ public class ReplyTestMethods {
     public static final String REPLY_WRITER = "REPLYWRITER";
 
     public static Reply createReply(){
-        Reply reply = new Reply();
-        reply.setContent(REPLY_CONTENT);
-        reply.setWriter(REPLY_WRITER);
-        return reply;
+        return Reply.builder()
+                .writer(REPLY_WRITER)
+                .content(REPLY_CONTENT)
+                .build();
     }
 }

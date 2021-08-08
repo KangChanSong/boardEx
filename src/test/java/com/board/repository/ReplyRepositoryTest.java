@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.board.test.methods.ReplyTestMethods.REPLY_CONTENT;
+import static com.board.test.methods.ReplyTestMethods.createReply;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -32,8 +34,7 @@ public class ReplyRepositoryTest {
         boardRepository.save(board);
         Board findBoard = boardRepository.find(board.getId());
 
-        Reply reply = new Reply();
-        reply.setContent("reply");
+        Reply reply = createReply();
         reply.setBoard(findBoard);
 
         //when
@@ -41,7 +42,7 @@ public class ReplyRepositoryTest {
         Reply findReply = replyRepository.find(saveId);
 
         //then
-        assertSame(findReply.getContent(), "reply");
+        assertSame(findReply.getContent(), REPLY_CONTENT);
         assertSame(findReply, findBoard.getReplies().get(0));
 
     }
